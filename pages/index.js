@@ -27,7 +27,7 @@ export default function Home() {
 
     useEffect(() => {
         if (error != '') console.log(error)
-        walletButtonHandler()
+//         walletButtonHandler()
         if (vmContract){
             getValueHandler()
         
@@ -117,14 +117,14 @@ export default function Home() {
         // alert('connect wallet')
     }
 
-    const walletButtonHandler = () => {
-        if (address){
-            setWalletButton("Connected")
-        }
-        else{
-            setWalletButton("Connect")
-        }
-    }
+//     const walletButtonHandler = () => {
+//         if (address){
+//             setWalletButton("Connected")
+//         }
+//         else{
+//             setWalletButton("Connect")
+//         }
+//     }
 
 
     
@@ -141,7 +141,7 @@ export default function Home() {
                     <h1>Works on Rinkeby testnet</h1>
                 </div>
                 <div className = "navbar-brand">
-                    <button className='button is-primary' onClick={ConnectWalletHandler}>{walletButton}</button>
+                    <button className='button is-primary' onClick={ConnectWalletHandler}>Connect</button>
                 </div>
             </div>
         </nav>
