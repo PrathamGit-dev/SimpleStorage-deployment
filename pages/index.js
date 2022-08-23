@@ -25,6 +25,19 @@ export default function Home() {
 
     // const [hello, setHello] = useState()
 
+    useEffect(() => {
+        walletButtonHandler()
+        if (vmContract){
+            getValueHandler()
+        
+        if (vmContract && address ) getValueHandler()
+        }
+        else{
+            vmContractHandler()
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [vmContract, address])
+
     const vmContractHandler = async () => {
         if(typeof window !== "undefined" && typeof window.ethereum !== "undefined"){
             try {
@@ -108,17 +121,7 @@ export default function Home() {
             setWalletButton("Connect")
         }
     }
-    useEffect(() => {
-        walletButtonHandler()
-        if (vmContract){
-            getValueHandler()
-        
-        if (vmContract && address ) getValueHandler()
-        }
-        else{
-            vmContractHandler()
-        }
-    }, [vmContract, address])
+
 
     
     return (
