@@ -41,6 +41,7 @@ export default function Home() {
     const vmContractHandler = async () => {
         if(typeof window !== "undefined" && typeof window.ethereum !== "undefined"){
             try {
+                console.log("Contract Handler fired")
                 web3 = new Web3(window.ethereum);
                 
                 setWeb3(web3)
@@ -57,7 +58,7 @@ export default function Home() {
 
     const getValueHandler = async () => {
         const val = await vmContract.methods.getVal().call()
-        // console.log("The value is => ", val)
+        console.log("The value is => ", val)
         setValue(val)
     }
 
@@ -92,7 +93,7 @@ export default function Home() {
 
 
     const ConnectWalletHandler = async() => {
-        // console.log("Connect wallet fired")
+        console.log("Connect wallet fired")
         if(typeof window !== "undefined" && typeof window.ethereum !== "undefined"){
             try {
                 await window.ethereum.request({method : "eth_requestAccounts"})
@@ -102,7 +103,7 @@ export default function Home() {
                 const accounts = await web3.eth.getAccounts()
                 setAddress(accounts[0])
 
-                // console.log(`current address is ${address}`)
+                console.log(`current address is ${address}`)
             }
             catch (err) {
                 setError("Unable to connect wallet")
