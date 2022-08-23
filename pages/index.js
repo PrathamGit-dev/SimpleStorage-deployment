@@ -26,6 +26,7 @@ export default function Home() {
     // const [hello, setHello] = useState()
 
     useEffect(() => {
+        if (error != '') console.log(error)
         walletButtonHandler()
         if (vmContract){
             getValueHandler()
