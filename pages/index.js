@@ -27,7 +27,7 @@ export default function Home() {
 
     useEffect(() => {
         if (error != '') console.log(error)
-//         walletButtonHandler()
+        // walletButtonHandler()
         if (vmContract){
             getValueHandler()
         
@@ -40,10 +40,9 @@ export default function Home() {
     }, [vmContract, address])
 
     const vmContractHandler = async () => {
-        if(typeof window !== "undefined" && typeof window.ethereum !== "undefined"){
+        // if(typeof window !== "undefined" && typeof window.ethereum !== "undefined"){
             try {
-                console.log("Contract Handler fired")
-                web3 = new Web3(window.ethereum);
+                web3 = await new Web3(window.ethereum);
                 
                 setWeb3(web3)
                 // const accounts = await web3.eth.getAccounts()
@@ -54,7 +53,7 @@ export default function Home() {
             catch (err) {
                 setError(err.message)
             }
-        }
+        // }
     }
 
     const getValueHandler = async () => {
@@ -94,12 +93,13 @@ export default function Home() {
 
 
     const ConnectWalletHandler = async() => {
-        console.log("Connect wallet fired")
-        if(typeof window !== "undefined" && typeof window.ethereum !== "undefined"){
+        // console.log("Connect wallet fired")
+        // if(typeof window !== "undefined" && typeof window.ethereum !== "undefined"){
             try {
-                await window.ethereum.request({method : "eth_requestAccounts"})
-                web3 = new Web3(window.ethereum)
-                setWeb3(web3)
+                // await window.ethereum.request({method : "eth_requestAccounts"})
+                // console.log("window.ethereum.request for accounts fulfilled")
+                // web3 = await new Web3(window.ethereum)
+                // setWeb3(web3)
 
                 const accounts = await web3.eth.getAccounts()
                 setAddress(accounts[0])
@@ -108,23 +108,24 @@ export default function Home() {
             }
             catch (err) {
                 setError("Unable to connect wallet")
+                console.log("Unable to connect=>",err)
             }
-        }
-        else{
-            setError("Install metamask")
-        }
+        // }
+        // else{
+            // setError("Install metamask")
+        // }
 
         // alert('connect wallet')
     }
 
-//     const walletButtonHandler = () => {
-//         if (address){
-//             setWalletButton("Connected")
-//         }
-//         else{
-//             setWalletButton("Connect")
-//         }
-//     }
+    const walletButtonHandler = () => {
+        if (address){
+            setWalletButton("Connected")
+        }
+        else{
+            setWalletButton("Connect")
+        }
+    }
 
 
     
