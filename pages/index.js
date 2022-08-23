@@ -2,7 +2,8 @@ import Head from 'next/head'
 import { useState, useEffect } from 'react'
 import 'bulma/css/bulma.css'
 import Web3 from 'web3'
-import SimpleStorage from './simplestorage'
+// import SimpleStorage from './simplestorage'
+// import styles from '../styles/VendingMachine.module.css'
 
 export default function Home() {
 
@@ -22,6 +23,8 @@ export default function Home() {
 
     const [walletButton, setWalletButton] = useState('')
 
+    // const [hello, setHello] = useState()
+
     useEffect(() => {
         walletButtonHandler()
         if (vmContract){
@@ -39,9 +42,11 @@ export default function Home() {
         if(typeof window !== "undefined" && typeof window.ethereum !== "undefined"){
             try {
                 web3 = new Web3(window.ethereum);
-                setWeb3(web3)
                 
-                const vm = SimpleStorage(web3)
+                setWeb3(web3)
+                // const accounts = await web3.eth.getAccounts()
+                const abi = [{"inputs":[],"stateMutability":"nonpayable","type":"constructor"},{"inputs":[],"name":"getVal","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"_value","type":"uint256"}],"name":"setVal","outputs":[],"stateMutability":"nonpayable","type":"function"}]
+                const vm = await new web3.eth.Contract(abi, "0x75d0C8C41336AC8E310207605F9034168840117e");
                 setVmContract(vm)
             }
             catch (err) {
@@ -56,8 +61,15 @@ export default function Home() {
         setValue(val)
     }
 
+    // const getMyDonutCountHandle = async () => {
+    //     // const accounts = await web3.eth.getAccounts()
+    //     //gives account of metamask thqat is connected
+    //     const count = await vmContract.methods.donutBalances(address).call()
+    //     setMyDonutCount(count)
+    // }
 
     const updateVal = (event) => {
+        // console.log(`donut quantity :: ${event.target.value}`)
         setVal_to_Change(event.target.value)
     }
 
@@ -65,7 +77,10 @@ export default function Home() {
         try{
         await vmContract.methods.setVal(val_to_change).send({
             from: address
+            // ,
+            // value: web3.utils.toWei('0.001', "ether") * buyCount
         })
+        // setPurchases(purchases++);
         setSuccessMsg(`${val_to_change} is the new value!!`)
         getValueHandler()
         }
@@ -77,6 +92,7 @@ export default function Home() {
 
 
     const ConnectWalletHandler = async() => {
+        // console.log("Connect wallet fired")
         if(typeof window !== "undefined" && typeof window.ethereum !== "undefined"){
             try {
                 await window.ethereum.request({method : "eth_requestAccounts"})
@@ -85,6 +101,8 @@ export default function Home() {
 
                 const accounts = await web3.eth.getAccounts()
                 setAddress(accounts[0])
+
+                // console.log(`current address is ${address}`)
             }
             catch (err) {
                 setError("Unable to connect wallet")
@@ -93,6 +111,8 @@ export default function Home() {
         else{
             setError("Install metamask")
         }
+
+        // alert('connect wallet')
     }
 
     const walletButtonHandler = () => {
