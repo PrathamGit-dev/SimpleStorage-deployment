@@ -64,8 +64,9 @@ export default function Home1() {
 
     const getValueHandler = async () => {
         const val = await vmContract.methods.getVal().call()
-        // console.log("The value is => ", val)
+        console.log("The value is => ", val)
         setValue(val)
+
     }
 
     // const getMyDonutCountHandle = async () => {
