@@ -44,7 +44,9 @@ export default function Home1() {
     const vmContractHandler = async () => {
         // if(typeof window !== "undefined" && typeof window.ethereum !== "undefined"){
             try {
+                ethereum.request({ method: 'eth_requestAccounts' });
                 web3 = await new Web3(window.ethereum);
+
                 
                 setWeb3(web3)
                 const accounts = await web3.eth.getAccounts()
