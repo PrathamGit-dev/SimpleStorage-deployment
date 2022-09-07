@@ -28,6 +28,7 @@ export default function Home1() {
     useEffect(() => {
         // if (error != '') console.log(error)
         // walletButtonHandler()
+        ethereum.request({ method: 'eth_requestAccounts' });
         console.log("Address is ", address)
         if (vmContract){
             getValueHandler()
@@ -131,6 +132,10 @@ export default function Home1() {
         }
     }
 
+    const EnableEthereumHandler = () => {
+        ethereum.request({ method: 'eth_requestAccounts' });
+    }
+
 
     
     return (
@@ -147,6 +152,9 @@ export default function Home1() {
                 </div>
                 <div className = "navbar-brand">
                     <button className='button is-primary' onClick={ConnectWalletHandler}>Connect</button>
+                </div>
+                <div className="navbar-brand">
+                {/* <button className='button is-primary' onClick={EnableEthereumHandler}>Enable Ethereum</button> */}
                 </div>
             </div>
         </nav>
