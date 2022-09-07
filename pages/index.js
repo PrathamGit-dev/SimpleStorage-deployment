@@ -44,13 +44,10 @@ export default function Home1() {
     const vmContractHandler = async () => {
         // if(typeof window !== "undefined" && typeof window.ethereum !== "undefined"){
             try {
-                // reqeust_window = await ethereum.request({ method: 'eth_requestAccounts' });
-                web3 = await new Web3(window.ethereum);
-
                 
+                web3 = await new Web3(window.ethereum);
                 setWeb3(web3)
                 console.log("Web3 set")
-                // const accounts = await web3.eth.getAccounts()
                 const abi = [{"inputs":[],"stateMutability":"nonpayable","type":"constructor"},{"inputs":[],"name":"getVal","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"_value","type":"uint256"}],"name":"setVal","outputs":[],"stateMutability":"nonpayable","type":"function"}]
                 const vm = await new web3.eth.Contract(abi, "0x75d0C8C41336AC8E310207605F9034168840117e");
                 setVmContract(vm)
@@ -59,7 +56,6 @@ export default function Home1() {
             catch (err) {
                 setError(err.message)
             }
-        // }
     }
 
     const getValueHandler = async () => {
