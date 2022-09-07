@@ -49,11 +49,8 @@ export default function Home1() {
 
                 
                 setWeb3(web3)
+                console.log("Web3 set")
                 // const accounts = await web3.eth.getAccounts()
-                const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
-                const account = accounts[0];
-                setAddress(accounts[0])
-                console.log("Address is ", address)
                 const abi = [{"inputs":[],"stateMutability":"nonpayable","type":"constructor"},{"inputs":[],"name":"getVal","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"_value","type":"uint256"}],"name":"setVal","outputs":[],"stateMutability":"nonpayable","type":"function"}]
                 const vm = await new web3.eth.Contract(abi, "0x75d0C8C41336AC8E310207605F9034168840117e");
                 setVmContract(vm)
@@ -109,9 +106,14 @@ export default function Home1() {
                 // console.log("window.ethereum.request for accounts fulfilled")
                 // web3 = await new Web3(window.ethereum)
                 // setWeb3(web3)
+                const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+                console.log("Accounts accessed")
+                const account = accounts[0];
+                setAddress(account)
+                console.log("Address is ", address)
 
-                const accounts = await web3.eth.getAccounts()
-                setAddress(accounts[0])
+                // const accounts = await web3.eth.getAccounts()
+                // setAddress(accounts[0])
 
                 // console.log(`current address is ${address}`)
             }
