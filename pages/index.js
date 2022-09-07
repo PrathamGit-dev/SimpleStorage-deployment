@@ -99,7 +99,7 @@ export default function Home1() {
 
 
     const ConnectWalletHandler = async() => {
-        // console.log("Connect wallet fired")
+        console.log("Connect wallet fired")
         // if(typeof window !== "undefined" && typeof window.ethereum !== "undefined"){
             try {
                 // await window.ethereum.request({method : "eth_requestAccounts"})
