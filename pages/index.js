@@ -28,7 +28,7 @@ export default function Home1() {
     useEffect(() => {
         // if (error != '') console.log(error)
         // walletButtonHandler()
-        ethereum.request({ method: 'eth_requestAccounts' });
+        // ethereum.request({ method: 'eth_requestAccounts' });
         console.log("Address is ", address)
         if (vmContract){
             getValueHandler()
@@ -44,12 +44,14 @@ export default function Home1() {
     const vmContractHandler = async () => {
         // if(typeof window !== "undefined" && typeof window.ethereum !== "undefined"){
             try {
-                ethereum.request({ method: 'eth_requestAccounts' });
+                // reqeust_window = await ethereum.request({ method: 'eth_requestAccounts' });
                 web3 = await new Web3(window.ethereum);
 
                 
                 setWeb3(web3)
-                const accounts = await web3.eth.getAccounts()
+                // const accounts = await web3.eth.getAccounts()
+                const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+                const account = accounts[0];
                 setAddress(accounts[0])
                 console.log("Address is ", address)
                 const abi = [{"inputs":[],"stateMutability":"nonpayable","type":"constructor"},{"inputs":[],"name":"getVal","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"_value","type":"uint256"}],"name":"setVal","outputs":[],"stateMutability":"nonpayable","type":"function"}]
